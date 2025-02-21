@@ -1,48 +1,61 @@
 import "../css/styles.css";
-import { PubSub } from "./pubsub.js";
 import { documentMock } from "./document-mock.js";
 
-(function () {
-  let navButtons;
+(function (doc) {
+  let dropdownButtons, windowWidth;
 
-  // eslint-disable-next-line no-undef
-  if (process.env.NODE_ENV !== "production") {
-    // eslint-disable-next-line no-console
-    console.log("Looks like we are in development mode!");
+  function menuToggle(event) {
+    event.stopPropagation();
+    const currentContainer = event.target.closest(".drop-container");
+    currentContainer.classList.toggle("visible");
   }
 
-  function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
+  function isLarger(menu) {
+    return (
+      parseInt(getComputedStyle(menu).getPropertyValue("min-width"), 10) >
+      windowWidth
+    );
+  }
+
+  function isRightSide(btn) {
+    const rect = btn.getBoundingClientRect();
+    const distanceRight = windowWidth - rect.right;
+    const distanceLeft = rect.left;
+    return distanceRight < distanceLeft;
+  }
+
+  function addStyling(btn) {
+    const currentMenu = btn
+      .closest(".drop-container")
+      .querySelector(".drop-menu");
+    if (currentMenu) {
+      if (isRightSide(btn)) currentMenu.style.setProperty("right", 0);
+      if (isLarger(currentMenu)) {
+        currentMenu.style.setProperty("min-width", "unset");
+        currentMenu.style.setProperty("width", "100%");
+      }
+      currentMenu.style.setProperty(
+        "--drop-menu-h",
+        currentMenu.scrollHeight + "px",
+      );
+    }
+  }
+
+  function bindEvents() {
+    dropdownButtons.forEach((btn) => {
+      addStyling(btn);
+      btn.addEventListener("click", menuToggle);
     });
   }
-
-  function handleNavigation(event) {
-    // Do something
-    scrollToTop();
-  }
-
-  function initNavigation() {
-    navButtons = document.querySelectorAll(".menu-nav");
-    navButtons.forEach((navButton) => {
-      navButton.addEventListener("click", handleNavigation);
-    });
-  }
-
 
   function init() {
-    initNavigation();
-
-    // Main application logic
+    dropdownButtons = doc.querySelectorAll(".drop-toggle");
+    windowWidth = window.innerWidth;
+    bindEvents();
   }
 
-  window.addEventListener("storage", () => {
-    init();
-  });
-
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initTodo);
+    document.addEventListener("DOMContentLoaded", init);
   } else {
     init();
   }
