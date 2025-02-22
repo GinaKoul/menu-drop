@@ -9,14 +9,12 @@ header {
 
 .drop-menu {
   position: absolute;
-  /* right: 0; */
   background: var(--drop-menu-bg, #fff);
-  min-width: var(--drop-menu-minw, 200px);
-  width: min-content;
   max-height: 0;
   height: 100%;
   overflow: hidden;
   transition: all 0.3s linear;
+  z-index: 100;
 }
 
 .drop-toggle,
@@ -62,4 +60,20 @@ header {
 
 .visible .drop-toggle:after {
   rotate: 180deg;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .drop-menu {
+    min-width: unset;
+    width: 100vw;
+  }
+}
+
+/* Desktop */
+@media (min-width: 481px) {
+  .drop-menu {
+    min-width: var(--drop-menu-minw, 200px);
+    width: min-content;
+  }
 }
