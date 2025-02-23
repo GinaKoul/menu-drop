@@ -1,0 +1,19 @@
+
+# source code
+src
+template.html
+
+# compiler
+webpack.common.js
+webpack.dev.js
+webpack.prod.js
+
+#  lint
+eslintrc.config.mjs
+.prettierrc
+
+# IDE - VSCode
+.vscode
+
+# git
+.git

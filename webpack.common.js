@@ -3,7 +3,17 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
+    target: "web",
     entry: "./src/assets/js/index.js",
+    output: {
+        filename: "main.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true,
+        library: "MenuDrop",
+        libraryTarget: 'umd',
+        globalObject: 'this',
+        umdNamedDefine: true,
+    },
     plugins: [
         new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({
