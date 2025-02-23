@@ -7,7 +7,7 @@ import eslintConfigPrettier from "eslint-config-prettier";
 export default [
   {languageOptions: { globals: globals.browser }},
   {
-    ignores: ["webpack.common.js","webpack.dev.js","webpack.prod.js"],
+    ignores: ["webpack.common.js","webpack.dev.js","webpack.prod.js","dist"],
   },
   pluginJs.configs.recommended,
   {

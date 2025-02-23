@@ -1,14 +1,38 @@
-import "../css/styles.css";
+import "../css/menu-drop.css";
 import { documentMock } from "./document-mock.js";
 
-(function (doc) {
-  const breakSm = 480;
-  const breakMd = 768;
-  const breakLg = 1279;
+export const MenuDrop = (function (doc) {
+  let breakSm = 480;
+  let breakMd = 768;
+  let breakLg = 1279;
   let prevWindowSize = "lg";
   let curWindowSize = "lg";
   let dropdownButtons;
   let windowWidth;
+
+  function setBreakpointSm(value) {
+    breakSm = value;
+  }
+
+  function getBreakpointSm() {
+    return breakSm;
+  }
+
+  function setBreakpointMd(value) {
+    breakMd = value;
+  }
+
+  function getBreakpointMd() {
+    return breakMd;
+  }
+
+  function setBreakpointLg(value) {
+    breakLg = value;
+  }
+
+  function getBreakpointLg() {
+    return breakLg;
+  }
 
   function closeMenu(event) {
     event.stopPropagation();
@@ -120,4 +144,13 @@ import { documentMock } from "./document-mock.js";
   } else {
     init();
   }
+
+  return {
+    setBreakpointSm,
+    getBreakpointSm,
+    setBreakpointMd,
+    getBreakpointMd,
+    setBreakpointLg,
+    getBreakpointLg,
+  };
 })(document || documentMock);

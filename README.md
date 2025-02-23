@@ -1,156 +1,111 @@
-# Basic Template
+# Menu Drop
 
-> ## Table of Contents
-- [Project Information](#project-information)
-- [Documentation](#documentation)
-    - [Project Setup](#project-setup)
-    - [Development Instructions](#development-instructions)
-    - [Deployment Instructions](#deployment-instructions)
-
-Welcome to the BASIC_TEMPLATE!\
-It's built using Webpack to manage assets and streamline the development process.\
-
-***Link to Project:*** PROJECT_LINK
-
-The BASIC_TEMPLATE contains the following functionalities:
-
-- **FUNCTIONALITY**
-
-> ## Project information
-
-**Version:** 1.0.0\
-**Last Build:** 20/02/2025
-
-**Technologies Used:**
-
-- **Webpack:** For bundling and compiling assets.
-- **ESLint:** For Linting
-- **Prettier:** For Formatting
-- **HTML, CSS, and JavaScript:** Core web technologies used to build the page.
-- **[Git](https://pages.github.com/):** For version control.
-
-> ## Documentation
-
-### Project Setup
-
-To get started with the project, you’ll need to clone the repository and install the dependencies.
-
-1. Clone the repository:
+## Package installation
 
 ```bash
-git clone <repository-url>
+npm install menu-drop
 ```
 
-2. Navigate to the project folder:
+## Import menu-drop to project
 
 ```bash
-cd <repo-name>
+import { MenuDrop } from "menu-drop";
 ```
 
-3. Install dependencies:
+## Use inside project
+
+- Add class drop-container to element that wraps the menu
+
+- Add class drop-toggle to element that toggles the state of menu (adds class visible to container)
+
+- Add class drop-menu to element that contains all menu items
+
+- Add class drop-item to all menu items
 
 ```bash
-npm install
+      <div class="drop-container">
+        <button class="drop-toggle">Menu Toggle</button>
+        <nav class="drop-menu">
+          <button class="drop-item">Menu Item 1</button>
+          <button class="drop-item">Menu Item 2</button>
+        </nav>
+      </div>
 ```
 
-Once the dependencies are installed, you're all set to start working on the project!
+## Change basic menu styling
 
-***Optional:*** Add the ESlint and Prettier extensions for VSCode
-
-#### Add ESlint extension
-
-- Launch VS Code Quick Open (Ctrl+P), paste the following command, and press enter.
+To change the basic styling of the menu add the variables you want to change to the :root of your css file
 
 ```bash
-ext install dbaeumer.vscode-eslint
+:root {
+    --drop-menu-bg: <Background color of all menus>;
+    --drop-toggle-py: <Menu toogle button padding y>;
+    --drop-toggle-px: <Menu toogle button padding x>;
+    --drop-item-brd-color: <Menu item border bottom color>;
+    --drop-menu-minw: <Menu minimum width in tablet and desktop>;
+}
 ```
 
-#### Add Prettier extension
+## Change breakpoints used in js
 
-- Launch VS Code Quick Open (Ctrl+P), paste the following command, and press enter.
+- The menu changes position depending on the distance from the left and the right side of the viewport.
+
+- It also takes up the whole viewport size if the minumum width of the menu is wider than the viewport.
+
+- On window resize, if the width of the window passes a breakpoint there is an update of the position and the width of the menu.
+
+- If needed the breakpoints used to update the position and width of the menu can be changed.
+
+### Breakpoint small
+
+**Default breakpoint small:** 480px
+
+**Breakpoint small range:** 0 - 480px
+
+**Change breakpoint small**
 
 ```bash
-ext install esbenp.prettier-vscode
+MenuDrop.setBreakpointSm(<Preferred breakpoint small size. It must be a number>);
 ```
 
-- Go to Settings > Search Settings > Default Formatter > Editor: Default Formatter > Select Prettier
-
-- Go to Settings > Text Editor > Formatting > Format On Save > Select it
-
-### Development Instructions
-
-During development, you can use the following command to start the development server:
+**Get breakpoint small**
 
 ```bash
-npm run dev
+MenuDrop.getBreakpointSm();
 ```
 
-This will compile and bundle your assets, launching a local development server.\
-The project will be accessible in your browser at http://localhost:8080 by default.\
-It automatically reloads the page whenever you make changes to the source files.
+### Breakpoint medium
 
-### Deployment Instructions
+**Default breakpoint medium:** 1279px
 
-Once you've finished development and are ready to deploy your changes, follow these steps:
+**Breakpoint medium range:** 768px - 1279px
 
-#### Before Commit
-
-1. Check conflicting rules between eslint and prettier
+**Change breakpoint medium**
 
 ```bash
-npm run test-rules
+MenuDrop.setBreakpointMd(<Preferred breakpoint medium size. It must be a number>);
 ```
 
-2.  Scan code with style rules of eslint
+**Get breakpoint medium**
 
 ```bash
-npm run scan
+MenuDrop.getBreakpointMd();
 ```
 
-3.  Check that files are already formatted
+### Breakpoint large
+
+**Default breakpoint large:** 1280px
+
+**Breakpoint large range:** 1280px +
+
+**Change breakpoint large**
 
 ```bash
-npm run test-format
+MenuDrop.setBreakpointLg(<Preferred breakpoint large size. It must be a number>);
 ```
 
-4. Format all files with prettier
+**Change breakpoint large**
 
 ```bash
-npm run format
+MenuDrop.getBreakpointLg();
 ```
-
-#### Commit
-
-1. Add all changes:
-
-```bash
-git add .
-```
-
-2. Commit your changes:
-
-```bash
-git commit -m "<Your commit message>"
-```
-
-3. Push your changes to the main branch:
-
-```bash
-git push origin main
-```
-
-4. Check the status: Make sure there are no uncommitted changes by running:
-
-```bash
-git status
-```
-
-#### After Commit
-
-1. Deploy the changes. Run the following command to deploy:
-
-```bash
-npm run deploy
-```
-
-This will push the compiled and minified assets to the [gh-pages](https://github.com/GinaKoul/REPO_NAME/tree/gh-pages) branch.
