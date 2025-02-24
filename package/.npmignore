@@ -1,7 +1,9 @@
 
 # source code
 src
-template.html
+
+#example folder
+example
 
 # compiler
 webpack.common.js
@@ -10,6 +12,7 @@ webpack.prod.js
 
 #  lint
 eslintrc.config.mjs
+.prettierignore
 .prettierrc
 
 # IDE - VSCode

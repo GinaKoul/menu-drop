@@ -68,7 +68,7 @@ export const MenuDrop = (function (doc) {
   function isGreater(menu) {
     return (
       parseInt(getComputedStyle(menu).getPropertyValue("min-width"), 10) >
-      windowWidth
+        windowWidth || windowWidth <= breakSm
     );
   }
 
@@ -94,15 +94,13 @@ export const MenuDrop = (function (doc) {
       .querySelector(".drop-menu");
     if (currentMenu) {
       const rect = getRect(btn);
-      if (isRightSide(rect)) {
-        currentMenu.style.setProperty("right", 0);
-      } else {
-        currentMenu.style.removeProperty("right");
-      }
+      currentMenu.style.removeProperty("right");
       if (isGreater(currentMenu)) {
         currentMenu.style.setProperty("min-width", "unset");
         currentMenu.style.setProperty("width", "100vw");
         currentMenu.style.setProperty("right", `-${getDistanceRight(rect)}px`);
+      } else if (isRightSide(rect)) {
+        currentMenu.style.setProperty("right", 0);
       }
       currentMenu.style.setProperty(
         "--drop-menu-h",
