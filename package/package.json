@@ -1,7 +1,7 @@
 {
   "name": "menu-drop",
   "description": "Responsive dropdown menu",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "author": "ginakoul",
   "module": "./dist/menu-drop.js",
   "browser": "./dist/menu-drop.js",
